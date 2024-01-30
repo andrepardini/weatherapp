@@ -8,9 +8,9 @@ The following is Lambda Code for the Index.html file
 Axios must be added in as a layer in AWS
 
 
-// Handler for AWS Lambda
-exports.handler = async (event) => {
-    const axios = require('axios');
+    // Handler for AWS Lambda
+    exports.handler = async (event) => {
+        const axios = require('axios');
 
     // Replace with your OpenWeatherMap API key
     const apiKey = 'API_KEY_GOES_HERE';
@@ -37,4 +37,4 @@ exports.handler = async (event) => {
             body: JSON.stringify(error.response.data)
         };
     }
-};
+    };
