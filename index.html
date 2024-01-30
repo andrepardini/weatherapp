@@ -1,0 +1,60 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Weather App</title>
+    <style>
+        body {
+            background-color: lightblue;
+            text-align: center;
+            font-family: Arial, sans-serif;
+        }
+        #weatherForm {
+            margin: 20px auto;
+            display: inline-block;
+        }
+        #weatherResult {
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Weather Information</h1>
+    <form id="weatherForm">
+        <label for="city">Enter City:</label>
+        <input type="text" id="city" name="city" required>
+        <button type="submit">Get Weather</button>
+    </form>
+    <div id="weatherResult"></div>
+
+    <script>
+        document.getElementById('weatherForm').addEventListener('submit', function(event) {
+            event.preventDefault();
+            const city = document.getElementById('city').value;
+            const apiUrl = 'https://opyn81nfwj.execute-api.us-west-2.amazonaws.com/weatherapp?city=' + city;
+            fetch(apiUrl)
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error('Network response was not ok');
+                    }
+                    return response.json();
+                })
+                .then(data => {
+                    // Display the weather data
+                    document.getElementById('weatherResult').innerHTML = `
+                        <h2>Weather in ${city}</h2>
+                        <p><strong>Temperature:</strong> ${data.main.temp} °F</p>
+                        <p><strong>Weather:</strong> ${data.weather[0].main}</p>
+                        <p><strong>Description:</strong> ${data.weather[0].description}</p>
+                    `;
+                })
+                .catch(error => {
+                    console.error('There has been a problem with your fetch operation:', error);
+                    document.getElementById('weatherResult').innerHTML = `<p>Error: ${error.message}</p>`;
+                });
+        });
+    </script>
+</body>
+</html>
