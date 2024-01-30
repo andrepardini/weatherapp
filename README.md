@@ -7,6 +7,7 @@ The following is Lambda Code for the Index.html file
 
 Axios must be added in as a layer in AWS
 
+Of course you must use your own OpenWeatherMap API Key which can be made for free.
 
     // Handler for AWS Lambda
     exports.handler = async (event) => {
@@ -38,3 +39,15 @@ Axios must be added in as a layer in AWS
             };
         }
     };
+
+
+
+
+
+The following is the Test code used when running.
+
+{
+  "queryStringParameters": {
+    "city": "Denver"
+  }
+}
